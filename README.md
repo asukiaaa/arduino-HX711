@@ -1,4 +1,4 @@
-# arduino-HX711
+# arduino-HX711 ( HX711_asukiaaa )
 
 A library to use multiple HX711 amplifier modules for load cells.
 
