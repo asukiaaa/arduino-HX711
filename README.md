@@ -4,7 +4,7 @@ A library to use multiple HX711 amplifier modules for load cells.
 
 # Usage
 
-See [examples](./examples).
+See [readMultiple example](./examples/readMultiple/readMultiple.ino).
 
 # License
 
