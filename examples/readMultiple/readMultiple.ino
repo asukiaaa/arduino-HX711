@@ -37,7 +37,7 @@ HX711_asukiaaa::Reader reader(pinsDout, numPins, pinSlk);
 // Load cell SC616C 500g
 // https://akizukidenshi.com/catalog/g/gP-12532/
 //---------------------------------------------------//
-// #define LOAD_CELL_RATED_VOLT 0.0007f
+// #define LOAD_CELL_RATED_VOLT 0.0008f
 // #define LOAD_CELL_RATED_GRAM 500.0f
 
 //---------------------------------------------------//
