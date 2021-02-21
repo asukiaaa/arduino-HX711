@@ -27,6 +27,13 @@ HX711_asukiaaa::Reader reader(pinsDout, numPins, pinSlk);
 // #define LOAD_CELL_RATED_GRAM 20000.0f
 
 //---------------------------------------------------//
+// Load cell SC133 2kg
+// https://akizukidenshi.com/catalog/g/gP-13041/
+//---------------------------------------------------//
+// #define LOAD_CELL_RATED_VOLT 0.001f
+// #define LOAD_CELL_RATED_GRAM 2000.0f
+
+//---------------------------------------------------//
 // Load cell SC616C 500g
 // https://akizukidenshi.com/catalog/g/gP-12532/
 //---------------------------------------------------//
