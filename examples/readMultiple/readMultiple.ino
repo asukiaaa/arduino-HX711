@@ -47,7 +47,10 @@ void setup() {
   Serial.begin(115200);
   Serial.println("start");
   reader.begin();
-  reader.read();
+  while(reader.read() != 0) {
+    Serial.println("Failed initial reading. Retry.");
+    delay(500);
+  }
   for (int i = 0; i < reader.doutLen; ++i) {
     offsetGrams[i] = parser.parseToGram(reader.values[i]);
   }
