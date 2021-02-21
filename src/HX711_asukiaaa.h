@@ -37,7 +37,7 @@ namespace HX711_asukiaaa {
     const int* pinsDout;
     const int pinSlk;
 
-    int readRawOnce(int32_t* readValues, unsigned long timeout = 50UL);
+    int readRawOnce(int32_t* readValues, unsigned long timeout = 100UL);
     bool pinsAreReady();
   };
 }
