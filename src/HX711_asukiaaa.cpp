@@ -21,7 +21,7 @@ namespace HX711_asukiaaa {
     return (float) raw * adc1bit / scale; // - offsetGram;
   }
 
-  Reader::Reader(int* pinsDout, int doutLen, int pinSlk):
+  Reader::Reader(const int* pinsDout, int doutLen, int pinSlk):
     doutLen(doutLen),
     pinsDout(pinsDout),
     pinSlk(pinSlk) {

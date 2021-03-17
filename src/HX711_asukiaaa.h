@@ -25,7 +25,7 @@ namespace HX711_asukiaaa {
 
   class Reader {
   public:
-    Reader(int* pinsDout, int doutLen, int pinSlk);
+    Reader(const int* pinsDout, int doutLen, int pinSlk);
     ~Reader();
     void begin();
     void reset();
