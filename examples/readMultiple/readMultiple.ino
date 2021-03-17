@@ -54,7 +54,7 @@ void setup() {
   Serial.begin(115200);
   Serial.println("start");
   reader.begin();
-  while(reader.read() != 0) {
+  while (reader.read() != 0) {
     Serial.println("Failed initial reading. Retry.");
     delay(500);
   }
