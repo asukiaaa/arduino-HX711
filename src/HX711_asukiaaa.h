@@ -28,6 +28,7 @@ namespace HX711_asukiaaa {
     Reader(const int* pinsDout, int doutLen, int pinSlk);
     ~Reader();
     void begin();
+    void beginWighoutInitialRead();
     void reset();
     int read(int sumNumber = 10);
 

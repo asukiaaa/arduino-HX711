@@ -33,6 +33,14 @@ namespace HX711_asukiaaa {
   }
 
   void Reader::begin() {
+    beginWighoutInitialRead();
+    int retryCount = 10;
+    while (retryCount >=0 && read() != ReadState::Success) {
+      --retryCount;
+    }
+  }
+
+  void Reader::beginWighoutInitialRead() {
     pinMode(pinSlk, OUTPUT);
     for (int i = 0; i < doutLen; ++i) {
       pinMode(pinsDout[i], INPUT);
