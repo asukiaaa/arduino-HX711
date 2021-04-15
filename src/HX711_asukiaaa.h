@@ -4,9 +4,13 @@
 #include <Arduino.h>
 
 namespace HX711_asukiaaa {
-  enum Error {
-    timeout = 1,
+  enum ReadState {
+    Success = 0,
+    Timeout = 1,
   };
+
+  String getStrOfReadState(int state);
+  String getStrOfReadState(ReadState state);
 
   class Parser {
   public:
@@ -30,7 +34,7 @@ namespace HX711_asukiaaa {
     void begin();
     void beginWighoutInitialRead();
     void reset();
-    int read(int sumNumber = 10);
+    ReadState read(int sumNumber = 10);
 
     int32_t* values;
     const int doutLen;
@@ -38,7 +42,7 @@ namespace HX711_asukiaaa {
     const int* pinsDout;
     const int pinSlk;
 
-    int readRawOnce(int32_t* readValues, unsigned long timeout = 100UL);
+    ReadState readRawOnce(int32_t* readValues, unsigned long timeout = 100UL);
     bool pinsAreReady();
   };
 }

@@ -6,6 +6,18 @@
 #define HX711_PGA 128
 
 namespace HX711_asukiaaa {
+  String getStrOfReadState(ReadState state) {
+    switch (state) {
+      case ReadState::Success: return "success";
+      case ReadState::Timeout: return "timeout";
+      default: return "unkown";
+    }
+  }
+
+  String getStrOfReadState(int state) {
+    return getStrOfReadState((ReadState) state);
+  }
+
   Parser::Parser(float ratedVoltage, float ratedGram, float r1, float r2):
     // ratedVoltage(ratedVoltage),
     // ratedGram(ratedGram),
@@ -55,7 +67,7 @@ namespace HX711_asukiaaa {
     delayMicroseconds(100);
   }
 
-  int Reader::read(int sumNumber) {
+  ReadState Reader::read(int sumNumber) {
     uint64_t sumValues[doutLen];
     for (int i = 0; i < doutLen; ++i) {
       sumValues[i] = 0;
@@ -63,8 +75,8 @@ namespace HX711_asukiaaa {
     int32_t data[doutLen];
     // Serial.println("readLen " + String(readLen));
     for (int sumCount = 0; sumCount < sumNumber; ++sumCount) {
-      int result = readRawOnce(data);
-      if (result != 0) { return result; }
+      ReadState readState = readRawOnce(data);
+      if (readState != ReadState::Success) { return readState; }
       for (int i = 0; i < doutLen; ++i) {
         // Serial.println("data " + String(sumCount) + " " + String(i) + " " + String(data[i]));
         sumValues[i] += data[i];
@@ -73,10 +85,10 @@ namespace HX711_asukiaaa {
     for (int i = 0; i < doutLen; ++i) {
       values[i] = sumValues[i] / sumNumber;
     }
-    return 0;
+    return ReadState::Success;
   }
 
-  int Reader::readRawOnce(int32_t *readValues, unsigned long timeout) {
+  ReadState Reader::readRawOnce(int32_t *readValues, unsigned long timeout) {
     int readLen = doutLen;
     for (int i = 0; i < readLen; ++i) {
       readValues[i] = 0;
@@ -84,7 +96,7 @@ namespace HX711_asukiaaa {
     unsigned long startedAt = millis();
     while (!pinsAreReady()) {
       if (millis() - startedAt > timeout) {
-        return Error::timeout;
+        return ReadState::Timeout;
       }
     };
     delayMicroseconds(10);
@@ -107,7 +119,7 @@ namespace HX711_asukiaaa {
       // Serial.println(readValues[i]);
       readValues[i] ^= 0x800000;
     }
-    return 0;
+    return ReadState::Success;
   }
 
   bool Reader::pinsAreReady() {

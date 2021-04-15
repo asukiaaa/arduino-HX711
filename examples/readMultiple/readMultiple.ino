@@ -60,14 +60,17 @@ void setup() {
 }
 
 void loop() {
-  reader.read();
-  for (int i = 0; i < reader.doutLen; ++i) {
-    float gram = parser.parseToGram(reader.values[i]) - offsetGrams[i];
-    Serial.print("sensor" + String(i) + ": " + String(gram/1000) + " kg ");
-    Serial.print("offset: " + String(offsetGrams[i]));
+  auto readState = reader.read();
+  Serial.println("ReadState: " + HX711_asukiaaa::getStrOfReadState(readState));
+  if (readState == HX711_asukiaaa::ReadState::Success) {
+    for (int i = 0; i < reader.doutLen; ++i) {
+      float gram = parser.parseToGram(reader.values[i]) - offsetGrams[i];
+      Serial.print("sensor" + String(i) + ": " + String(gram/1000) + " kg ");
+      Serial.print("offset: " + String(offsetGrams[i]));
+      Serial.println("");
+    }
+    Serial.println("at " + String(millis()));
     Serial.println("");
   }
-  Serial.println("at " + String(millis()));
-  Serial.println("");
   delay(1000);
 }
