@@ -47,7 +47,8 @@ HX711_asukiaaa::Reader reader(pinsDout, numPins, pinSlk);
 #define HX711_R1 20000.0
 #define HX711_R2 8200.0
 
-HX711_asukiaaa::Parser parser(LOAD_CELL_RATED_VOLT, LOAD_CELL_RATED_GRAM, HX711_R1, HX711_R2);
+HX711_asukiaaa::Parser parser(LOAD_CELL_RATED_VOLT, LOAD_CELL_RATED_GRAM,
+                              HX711_R1, HX711_R2);
 float offsetGrams[numPins];
 
 void setup() {
@@ -65,7 +66,7 @@ void loop() {
   if (readState == HX711_asukiaaa::ReadState::Success) {
     for (int i = 0; i < reader.doutLen; ++i) {
       float gram = parser.parseToGram(reader.values[i]) - offsetGrams[i];
-      Serial.print("sensor" + String(i) + ": " + String(gram/1000) + " kg ");
+      Serial.print("sensor" + String(i) + ": " + String(gram / 1000) + " kg ");
       Serial.print("offset: " + String(offsetGrams[i]));
       Serial.println("");
     }
