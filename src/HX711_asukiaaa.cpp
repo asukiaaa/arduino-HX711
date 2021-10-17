@@ -1,8 +1,8 @@
 #include "HX711_asukiaaa.h"
 
 #define HX711_VBG 1.25f
-#define HX711_AVDD 4.2987f  // (HX711_VBG*((HX711_R1+HX711_R2)/HX711_R2))
-#define HX711_ADC1BIT (HX711_AVDD / 16777216)  // 16777216=(2^24)
+// #define HX711_AVDD 4.2987f  // (HX711_VBG*((HX711_R1+HX711_R2)/HX711_R2))
+// #define HX711_ADC1BIT (HX711_AVDD / 16777216)  // 16777216=(2^24)
 #define HX711_PGA 128
 
 namespace HX711_asukiaaa {
@@ -27,8 +27,8 @@ Parser::Parser(float ratedVoltage, float ratedGram, float r1, float r2)
        // r1(r1),
        // r2(r2),
       avdd(HX711_VBG * ((r1 + r2) / r2)),
-      adc1bit(avdd / 16777216),
-      scale(ratedVoltage * HX711_AVDD / ratedGram * HX711_PGA) {
+      adc1bit(avdd / 0x1000000), // 24bit
+      scale(ratedVoltage * avdd / ratedGram * HX711_PGA) {
   // offsetGram = 0;
 }
 
