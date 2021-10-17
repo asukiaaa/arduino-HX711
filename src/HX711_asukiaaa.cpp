@@ -126,14 +126,13 @@ ReadState Reader::readRawOnce(int32_t* readValues, unsigned long timeout) {
 }
 
 bool Reader::pinsAreReady() {
-  bool allReady = true;
   for (int i = 0; i < doutLen; ++i) {
     if (digitalRead(pinsDout[i]) == HIGH) {
       // Serial.println("notReady " + String(pinsDout[i]));
-      allReady = false;
+      return false;
     }
   }
-  return allReady;
+  return true;
 }
 
 }  // namespace HX711_asukiaaa
