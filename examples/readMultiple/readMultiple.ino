@@ -67,7 +67,11 @@ void loop() {
     for (int i = 0; i < reader.doutLen; ++i) {
       float gram = parser.parseToGram(reader.values[i]) - offsetGrams[i];
       Serial.print("sensor" + String(i) + ": " + String(gram / 1000) + " kg ");
-      Serial.print("offset: " + String(offsetGrams[i]));
+      Serial.print("offset: " + String(offsetGrams[i]) + " g ");
+      Serial.print("voltage: " +
+                   String(parser.parseToMicroVolt(reader.values[i])) + " uV ");
+      Serial.print(String(parser.parseToMicroVolt(reader.values[i]) / 1000) +
+                   " mV ");
       Serial.println("");
     }
     Serial.println("at " + String(millis()));

@@ -16,6 +16,7 @@ class Parser {
  public:
   Parser(float ratedVoltage, float ratedGram, float r1, float r2);
   float parseToGram(int32_t raw);
+  float parseToMicroVolt(int32_t raw);
   // float offsetGram;
  private:
   // const float ratedVoltage;

@@ -32,6 +32,10 @@ Parser::Parser(float ratedVoltage, float ratedGram, float r1, float r2)
   // offsetGram = 0;
 }
 
+float Parser::parseToMicroVolt(int32_t raw) {
+  return (raw - 0x800000); // * (adc1bitVolt * 1000 * 1000);
+}
+
 float Parser::parseToGram(int32_t raw) {
   return (float)raw * adc1bit / scale;  // - offsetGram;
 }
